@@ -1,0 +1,14 @@
+.navbar-brand, .nav-link{
+    font-size: 1.5rem;}
+img{
+    width:100%;}
+#tituloIndex{
+    font-size:3rem;}
+#footer {
+    margin-top: 1%;
+    background-color: #051361; }
+    #footer a:hover .fa-brands {
+      color: black;
+      text-shadow: 0px 0px 4px white; }
+.fa-brands {
+    color: white; }
