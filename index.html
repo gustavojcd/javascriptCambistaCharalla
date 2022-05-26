@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
-    <title>Cambio de Divisas</title>
+    <title>Cambista online</title>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#"><i class="fa-solid fa-comments-dollar"></i> CAMBISTA ONLINE</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,8 +29,18 @@
                   </li>
                 </ul>
                 <form class="d-flex">
-                    <button id="btnIniciarSesion" class="btn btn-outline-success me-4" type="submit">Iniciar Sesion</button>
-                    <button id="btnRegistrate" class="btn btn-outline-success" type="submit">Registrate</button>
+                    <div><label id="lblBienvenida" class="me-2 d-none" for="">Bienvenido</label></div>
+                    <div class="dropdown">
+                        <button id="btnUser" class="btn btn-secondary me-4 d-none" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
+                          <li><a class="dropdown-item" href="#">Historial</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a id="btnCerrarSesion" class="dropdown-item" href="">Cerrar Sesion</a></li>
+                        </ul>
+                    </div>
+                    <button id="btnIniciarSesion" class="btn btn-secondary me-4" type="submit" href="#">Iniciar Sesion</button>
+                    <button id="btnRegistrate" class="btn btn-secondary" type="submit" href="#">Registrate</button>
                 </form>
                 </div>
             </div>
@@ -45,8 +55,8 @@
                 <div class="p-3">
                     <p id="tituloIndex">Cambia Dólares, Euros y Soles online con el mejor tipo de cambio</p>
                     <form class="d-flex justify-content-md-around mt-5">
-                        <button id="btnIniciarSesion" class="btn btn-outline-success me-4" type="submit">Quiero Comprar</button>
-                        <button id="btnRegistrate" class="btn btn-outline-success" type="submit">Quiero Vender</button>
+                        <button id="btnIniciarSesion" class="btn btn-secondary me-4" type="submit">Quiero Comprar</button>
+                        <button id="btnRegistrate" class="btn btn-secondary" type="submit">Quiero Vender</button>
                     </form>
                 </div>
                 

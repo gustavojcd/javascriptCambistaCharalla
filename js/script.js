@@ -1,4 +1,4 @@
-class usuario{
+class Usuario{
     constructor(nombre, apellido, email, user, password){
         this.nombre = nombre;
         this.apellido = apellido;
@@ -6,8 +6,20 @@ class usuario{
         this.user = user;
         this.password = password;
     }
+    iniciaSesion(){
+        btnIniciarSesion.classList.add('d-none');
+        btnRegistrate.classList.add('d-none')
+        btnUser.classList.remove('d-none');
+        lblBienvenida.classList.remove('d-none');
+        btnUser.innerHTML = `<i class="fa-solid fa-user pe-2"></i>${user}`
+    }
+    terminaSesion(){
+        if(btnCerrarSesion.onclick){
+
+        }
+    }
 }
-class cambio{
+class Cambio{
     constructor(cantidadDinero, divisaOrigen, divisaDestino){
         this.cantidadDinero = cantidadDinero;
         this.divisaOrigen = divisaOrigen;
@@ -28,15 +40,28 @@ class cambio{
         return cantidadDinero*3.775;
     }
 }
-//-----------------------------------------------------------------------------------
-// Aqui creo un array de objetos usuario para usarlo como base de datos temporal-----
-//-----------------------------------------------------------------------------------
+
+
+//--------------------------------------
+//Variables para el DOM-----------------
+//--------------------------------------
+var btnIniciarSesion = document.getElementById('btnIniciarSesion');
+var btnRegistrate = document.getElementById('btnRegistrate');
+var btnUser = document.getElementById('btnUser');
+var btnCerrarSesion = document.getElementById('btnCerrarSesion');
+var lblBienvenida = document.getElementById('lblBienvenida');
+
+
+//---------------------------------------------
+// Aqui creo un array de objetos Usuario-------
+//---------------------------------------------
 var usuariosActivos = [];
-usuariosActivos.push(new usuario ('humberto','sanchez','humberto@gmail.com', 'beto','humberto123'));
-usuariosActivos.push(new usuario ('lorenzo','vargas','lorenzo-v@outlook.com', 'lolo', 'lorenzo123456'));
-usuariosActivos.push(new usuario ('carlos','chacon','cchacon@protonmail.com', 'carlitos','carlos789'));
-usuariosActivos.push(new usuario ('jerry','casalino','jerry_casalino@gmail.com', 'jerrylin', 'jc789123'));
-usuariosActivos.push(new usuario ('pablo','perez','ppbrito@outlook.com', 'pablito', 'perez123'));
+usuariosActivos.push(new Usuario ('humberto','sanchez','humberto@gmail.com', 'beto','humberto123'));
+usuariosActivos.push(new Usuario ('lorenzo','vargas','lorenzo-v@outlook.com', 'lolo', 'lorenzo123456'));
+usuariosActivos.push(new Usuario ('carlos','chacon','cchacon@protonmail.com', 'carlitos','carlos789'));
+usuariosActivos.push(new Usuario ('jerry','casalino','jerry_casalino@gmail.com', 'jerrylin', 'jc789123'));
+usuariosActivos.push(new Usuario ('pablo','perez','ppbrito@outlook.com', 'pablito', 'perez123'));
+
 
 //-------------------------------
 //Menu de bienvenida-------------
@@ -49,8 +74,9 @@ switch(opcion){
         var email= prompt("ingresa tu email:");
         var user = prompt("ingresa tu nombre de usuario");
         var password= prompt("ingresa tu password:");
-        var nuevoUsuario = new usuario (nombre, apellido, email, user, password);
+        var nuevoUsuario = new Usuario (nombre, apellido, email, user, password);
         alert("Hola "+nuevoUsuario.nombre+", te registraste exitosamente");
+        nuevoUsuario.iniciaSesion();
         break;
     case '2':
         var cantidadDinero = prompt("ingresa la cantidad de dinero: ");
@@ -77,7 +103,7 @@ switch(opcion){
         break;
 }
 
-var result = new cambio (cantidadDinero, divisaOrigen, divisaDestino)
+var result = new Cambio (cantidadDinero, divisaOrigen, divisaDestino)
 
 if (result.divisaOrigen == "soles" && result.divisaDestino == "euros"){
     alert("Recibes "+result.solesToEuros().toFixed(2)+" euros");
