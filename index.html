@@ -30,23 +30,89 @@
                 </ul>
                 <form class="d-flex">
                     <div><label id="lblBienvenida" class="me-2 d-none" for="">Bienvenido</label></div>
-                    <div class="dropdown">
-                        <button id="btnUser" class="btn btn-secondary me-4 d-none" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                    <div class="dropdown me-5">
+                        <button id="btnUser" class="btn btn-secondary d-none" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                          <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
-                          <li><a class="dropdown-item" href="#">Historial</a></li>
+                          <li><a class="dropdown-item">Mi Perfil</a></li>
+                          <li><a class="dropdown-item">Historial</a></li>
                           <li><hr class="dropdown-divider"></li>
-                          <li><a id="btnCerrarSesion" class="dropdown-item" href="">Cerrar Sesion</a></li>
+                          <li><a id="btnCerrarSesion" class="dropdown-item" href="#">Salir</a></li>
                         </ul>
                     </div>
-                    <button id="btnIniciarSesion" class="btn btn-secondary me-4" type="submit" href="#">Iniciar Sesion</button>
-                    <button id="btnRegistrate" class="btn btn-secondary" type="submit" href="#">Registrate</button>
+                    <button id="btnIniciaSesion" type="button" class="btn btn-secondary me-4" data-bs-toggle="modal" data-bs-target="#iniciaSesionModal">Iniciar Sesion</button>
+                    <button id="btnRegistrate" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#registroModal">Registrate</button>
                 </form>
                 </div>
             </div>
         </nav>
     </header>
     <main>
+        <div class="modal fade" id="iniciaSesionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Inicio</h5>
+                    </div>
+                    <div class="modal-body">
+                        <form id="frmIniciaSesion" class="frmModal" action="">
+                            <div class="mb-3">
+                                <label for="txtEmailIniciaSesion" class="form-label">Correo:</label>
+                                <input type="email" class="form-control" id="txtEmailIniciaSesion">
+                            </div>
+                            <div class="mb-3">
+                                <label for="txtPassIniciaSesion" class="form-label">Contraseña:</label>
+                                <input type="password" class="form-control" id="txtPassIniciaSesion">
+                            </div>
+                        </form>
+                    </div>
+                    <div><label id="lblErrorIniciaSesion" class="ms-3" for=""></label></div>
+                    <div class="modal-footer">
+                        <button id="btnCancelaInicioModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button id="btnIniciaSesionModal" type="button" class="btn btn-primary">Iniciar Sesion</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="registroModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Nuevo Usuario</h5>
+                    </div>
+                    <div class="modal-body">
+                        <form id="frmRegistro" class="frmModal" action="">
+                            <div class="mb-3">
+                                <label for="txtNombre" class="form-label">Nombre:</label>
+                                <input type="text" class="form-control" id="txtNombre">
+                            </div>
+                            <div class="mb-3">
+                                <label for="txtApellido" class="form-label">Apellido:</label>
+                                <input type="text" class="form-control" id="txtApellido">
+                            </div>
+                            <div class="mb-3">
+                                <label for="txtEmail" class="form-label">Correo:</label>
+                                <input type="email" class="form-control" id="txtEmail">
+                            </div>
+                            <div class="mb-3">
+                                <label for="txtUser" class="form-label">Usuario:</label>
+                                <input type="text" class="form-control" id="txtUser">
+                            </div>
+                            <div class="mb-3">
+                                <label for="txtPassword" class="form-label">Contraseña:</label>
+                                <input type="password" class="form-control" id="txtPassword">
+                            </div>
+                        </form>
+                    </div>
+                    <div><label id="lblErrorRegistro" class="ms-3" for=""></label></div>
+                    <div class="modal-footer">
+                        <button id="btnCancelaRegistroModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button id="btnRegistrateModal" type="button" class="btn btn-primary">Registrate</button>
+                    </div>
+                </div>
+            </div>
+        
+        
+        </div>
         <div>
             <div class="container-fluid d-md-inline-flex justify-content-md-around align-items-md-center mt-5 mb-5">
                 <div class="mb-5 ms-5 me-5">
@@ -55,8 +121,8 @@
                 <div class="p-3">
                     <p id="tituloIndex">Cambia Dólares, Euros y Soles online con el mejor tipo de cambio</p>
                     <form class="d-flex justify-content-md-around mt-5">
-                        <button id="btnIniciarSesion" class="btn btn-secondary me-4" type="submit">Quiero Comprar</button>
-                        <button id="btnRegistrate" class="btn btn-secondary" type="submit">Quiero Vender</button>
+                        <button id="btnComprar" class="btn btn-secondary me-4" type="submit">Quiero Comprar</button>
+                        <button id="btnVender" class="btn btn-secondary" type="submit">Quiero Vender</button>
                     </form>
                 </div>
                 

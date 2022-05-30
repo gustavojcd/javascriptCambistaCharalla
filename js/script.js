@@ -1,3 +1,24 @@
+//--------------------------------------
+//Variables Globales-----------------
+//--------------------------------------
+var btnIniciaSesion = document.getElementById('btnIniciaSesion');
+var btnRegistrate = document.getElementById('btnRegistrate');
+var btnUser = document.getElementById('btnUser');
+var btnCerrarSesion = document.getElementById('btnCerrarSesion');
+var lblBienvenida = document.getElementById('lblBienvenida');
+var btnRegistrateModal = document.getElementById('btnRegistrateModal');
+var btnCancelaRegistroModal = document.getElementById('btnCancelaRegistroModal');
+var btnIniciaSesionModal = document.getElementById('btnIniciaSesionModal');
+var btnCancelaInicioModal = document.getElementById('btnCancelaInicioModal');
+var iniciaSesionModal = new bootstrap.Modal(document.getElementById('iniciaSesionModal'));
+var registroModal = new bootstrap.Modal(document.getElementById('registroModal'));
+var usuariosActivos = [];
+var btnComprar = document.getElementById('btnComprar');
+var btnVender = document.getElementById('btnVender');
+
+//--------------------------------------
+//Clases------------------------------
+//--------------------------------------
 class Usuario{
     constructor(nombre, apellido, email, user, password){
         this.nombre = nombre;
@@ -7,16 +28,18 @@ class Usuario{
         this.password = password;
     }
     iniciaSesion(){
-        btnIniciarSesion.classList.add('d-none');
+        btnIniciaSesion.classList.add('d-none');
         btnRegistrate.classList.add('d-none')
         btnUser.classList.remove('d-none');
         lblBienvenida.classList.remove('d-none');
-        btnUser.innerHTML = `<i class="fa-solid fa-user pe-2"></i>${user}`
+        btnUser.innerHTML = `<i class="fa-solid fa-user pe-2"></i>${this.user}`
     }
-    terminaSesion(){
-        if(btnCerrarSesion.onclick){
-
-        }
+    cerrarSesion(){
+        btnIniciaSesion.classList.remove('d-none');
+        btnRegistrate.classList.remove('d-none')
+        btnUser.classList.add('d-none');
+        lblBienvenida.classList.add('d-none');
+        btnUser.innerHtml = "";
     }
 }
 class Cambio{
@@ -41,81 +64,77 @@ class Cambio{
     }
 }
 
-
 //--------------------------------------
-//Variables para el DOM-----------------
+//Funciones------------------------------
 //--------------------------------------
-var btnIniciarSesion = document.getElementById('btnIniciarSesion');
-var btnRegistrate = document.getElementById('btnRegistrate');
-var btnUser = document.getElementById('btnUser');
-var btnCerrarSesion = document.getElementById('btnCerrarSesion');
-var lblBienvenida = document.getElementById('lblBienvenida');
+function validaInicioSesion () {
+    var lblErrorIniciaSesion = document.getElementById('lblErrorIniciaSesion');
+    var txtEmailIniciaSesion = document.getElementById('txtEmailIniciaSesion').value.toLowerCase();
+    var txtPassIniciaSesion = document.getElementById('txtPassIniciaSesion').value.trim();
 
+    if(txtEmailIniciaSesion.length == 0 || txtPassIniciaSesion.length == 0){
+        lblErrorIniciaSesion.innerText = "Debes llenar todos los datos requeridos";
+    }else{
+        if(usuariosActivos.some(usuario => usuario.email === txtEmailIniciaSesion && usuario.password === txtPassIniciaSesion)){
+            var indice = usuariosActivos.findIndex(usuario => usuario.email === txtEmailIniciaSesion);
+            usuariosActivos[indice].iniciaSesion();
+            iniciaSesionModal.hide();
+            limpiaDatos();
+        }else{
+            lblErrorIniciaSesion.innerText = "El usuario no existe o la clave es incorrecta";
+        }   
+    }
+}
+function validaRegistro () {
+    var lblErrorRegistro = document.getElementById('lblErrorRegistro');
+    var frmRegistro = document.getElementById('frmRegistro');
+    var elements = frmRegistro.querySelectorAll('.form-control');
+    for (input of elements){
+        if (input.value.length == 0){
+            lblErrorRegistro.innerText = "Debes llenar todos los datos requeridos";
+            return false;
+        }
+    }
+    return true;
+}
+function creaNuevoUsuario () {
+    
+    var txtNombre = document.getElementById('txtNombre').value.toLowerCase();
+    var txtApellido = document.getElementById('txtApellido').value.toLowerCase();
+    var txtEmail = document.getElementById('txtEmail').value.toLowerCase();
+    var txtUser = document.getElementById('txtUser').value.trim();
+    var txtPassword = document.getElementById('txtPassword').value.trim();
+    if (validaRegistro()){
+        usuariosActivos.push( new Usuario(txtNombre, txtApellido, txtEmail, txtUser, txtPassword));
+        alert(`Hola ${txtNombre}, te registraste exitosamente porfavor inicia sesion`);
+        registroModal.hide();
+        limpiaDatos();
+    }
+}
+function limpiaDatos () {
+    var elements = document.querySelectorAll('.form-control');
+    for (input of elements){
+        input.value="";
+    }
+    lblErrorIniciaSesion.innerText= "";
+    lblErrorRegistro.innerText="";
+}
 
-//---------------------------------------------
-// Aqui creo un array de objetos Usuario-------
-//---------------------------------------------
-var usuariosActivos = [];
+//-----------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------
 usuariosActivos.push(new Usuario ('humberto','sanchez','humberto@gmail.com', 'beto','humberto123'));
 usuariosActivos.push(new Usuario ('lorenzo','vargas','lorenzo-v@outlook.com', 'lolo', 'lorenzo123456'));
 usuariosActivos.push(new Usuario ('carlos','chacon','cchacon@protonmail.com', 'carlitos','carlos789'));
 usuariosActivos.push(new Usuario ('jerry','casalino','jerry_casalino@gmail.com', 'jerrylin', 'jc789123'));
 usuariosActivos.push(new Usuario ('pablo','perez','ppbrito@outlook.com', 'pablito', 'perez123'));
+usuariosActivos.push(new Usuario ('asdf','asdf','asdf','asdf','asdf'));
 
-
-//-------------------------------
-//Menu de bienvenida-------------
-//-------------------------------
-var opcion=prompt("Bienvenido, elige una opcion: \n1. Registrate\n2. Cambia Divisa\n3. Cantidad de usuarios activos\n4. Recupera tu cuenta");
-switch(opcion){
-    case '1':
-        var nombre = prompt("ingresa tu nombre:");
-        var apellido = prompt("ingresa tu apellido:");
-        var email= prompt("ingresa tu email:");
-        var user = prompt("ingresa tu nombre de usuario");
-        var password= prompt("ingresa tu password:");
-        var nuevoUsuario = new Usuario (nombre, apellido, email, user, password);
-        alert("Hola "+nuevoUsuario.nombre+", te registraste exitosamente");
-        nuevoUsuario.iniciaSesion();
-        break;
-    case '2':
-        var cantidadDinero = prompt("ingresa la cantidad de dinero: ");
-        var divisaOrigen = prompt("ingresa la divisa de origen: ");
-        if(divisaOrigen == "euros" || divisaOrigen == "dolares"){
-            var divisaDestino = "soles";
-        }else{
-            var divisaDestino = prompt("ingresa la divisa a la que quieres cambiar tu dinero: ");
-        }
-        break;
-    case '3':
-        var cantUsuarios = 0;
-        usuariosActivos.forEach(() => cantUsuarios +=1);
-        alert("cantidad de usuarios activos: "+cantUsuarios)
-        break;
-    case '4':
-        var buscaUsuario = prompt("Escribe tu nombre de usuario:")
-        if(usuariosActivos.some(usuario => usuario.user == buscaUsuario)){
-            alert("Usuario encontrado, revisa tu correo y sigue las instrucciones para recuperar tu cuenta")
-        }else{
-            alert("El usuario no existe")
-        }
-    default:
-        break;
-}
-
-var result = new Cambio (cantidadDinero, divisaOrigen, divisaDestino)
-
-if (result.divisaOrigen == "soles" && result.divisaDestino == "euros"){
-    alert("Recibes "+result.solesToEuros().toFixed(2)+" euros");
-}
-if (result.divisaOrigen == "soles" && result.divisaDestino == "dolares"){
-    alert("Recibes "+result.solesToDolares().toFixed(2)+ " dolares");
-}
-if (result.divisaOrigen == "euros"){
-    alert("Recibes "+result.eurosToSoles().toFixed(2)+" soles");
-}
-if (result.divisaOrigen == "dolares"){
-    alert("Recibes "+result.dolaresToSoles().toFixed(2)+" soles");
-}
-
-
+btnIniciaSesionModal.addEventListener('click',validaInicioSesion);
+btnCancelaInicioModal.addEventListener('click', limpiaDatos);
+btnCerrarSesion.addEventListener('click',(e) => {
+    e.preventDefault();
+    var indice = usuariosActivos.findIndex(usuario => usuario.user == btnUser.textContent);
+    usuariosActivos[indice].cerrarSesion();
+});
+btnRegistrateModal.addEventListener('click',creaNuevoUsuario);
+btnCancelaRegistroModal.addEventListener('click', limpiaDatos);
