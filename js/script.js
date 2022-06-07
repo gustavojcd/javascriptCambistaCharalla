@@ -13,8 +13,8 @@ var btnCancelaInicioModal = document.getElementById('btnCancelaInicioModal');
 var iniciaSesionModal = new bootstrap.Modal(document.getElementById('iniciaSesionModal'));
 var registroModal = new bootstrap.Modal(document.getElementById('registroModal'));
 var usuariosActivos = [];
-var btnComprar = document.getElementById('btnComprar');
-var btnVender = document.getElementById('btnVender');
+var viewCambio = document.getElementById('viewCambio');
+var viewBienvenida = document.getElementById('viewBienvenida')
 
 //--------------------------------------
 //Clases------------------------------
@@ -33,6 +33,9 @@ class Usuario{
         btnUser.classList.remove('d-none');
         lblBienvenida.classList.remove('d-none');
         btnUser.innerHTML = `<i class="fa-solid fa-user pe-2"></i>${this.user}`
+        localStorage.setItem('userName', this.user);
+        viewBienvenida.classList.add('d-none');
+        viewCambio.classList.remove('d-none');
     }
     cerrarSesion(){
         btnIniciaSesion.classList.remove('d-none');
@@ -40,6 +43,9 @@ class Usuario{
         btnUser.classList.add('d-none');
         lblBienvenida.classList.add('d-none');
         btnUser.innerHtml = "";
+        localStorage.clear();
+        viewBienvenida.classList.remove('d-none');
+        viewCambio.classList.add('d-none');
     }
 }
 class Cambio{
@@ -67,12 +73,30 @@ class Cambio{
 //--------------------------------------
 //Funciones------------------------------
 //--------------------------------------
+function limpiaDatos () {
+    var elements = document.querySelectorAll('.form-control');
+    for (input of elements){
+        input.value="";
+    }
+    lblErrorIniciaSesion.innerText= "";
+    lblErrorRegistro.innerText="";
+}
+function validaInput(container){
+    var frmContainer = document.getElementById(container)
+    var elements = frmContainer.querySelectorAll('.form-control');
+    for (input of elements){
+        if (input.value.length === 0){
+            return true;
+        }
+    }
+    return false;
+}
 function validaInicioSesion () {
     var lblErrorIniciaSesion = document.getElementById('lblErrorIniciaSesion');
     var txtEmailIniciaSesion = document.getElementById('txtEmailIniciaSesion').value.toLowerCase();
     var txtPassIniciaSesion = document.getElementById('txtPassIniciaSesion').value.trim();
 
-    if(txtEmailIniciaSesion.length == 0 || txtPassIniciaSesion.length == 0){
+    if(validaInput('frmIniciaSesion')){
         lblErrorIniciaSesion.innerText = "Debes llenar todos los datos requeridos";
     }else{
         if(usuariosActivos.some(usuario => usuario.email === txtEmailIniciaSesion && usuario.password === txtPassIniciaSesion)){
@@ -85,41 +109,22 @@ function validaInicioSesion () {
         }   
     }
 }
-function validaRegistro () {
-    var lblErrorRegistro = document.getElementById('lblErrorRegistro');
-    var frmRegistro = document.getElementById('frmRegistro');
-    var elements = frmRegistro.querySelectorAll('.form-control');
-    for (input of elements){
-        if (input.value.length == 0){
-            lblErrorRegistro.innerText = "Debes llenar todos los datos requeridos";
-            return false;
-        }
-    }
-    return true;
-}
 function creaNuevoUsuario () {
-    
     var txtNombre = document.getElementById('txtNombre').value.toLowerCase();
     var txtApellido = document.getElementById('txtApellido').value.toLowerCase();
     var txtEmail = document.getElementById('txtEmail').value.toLowerCase();
     var txtUser = document.getElementById('txtUser').value.trim();
     var txtPassword = document.getElementById('txtPassword').value.trim();
-    if (validaRegistro()){
+    var lblErrorRegistro = document.getElementById('lblErrorRegistro');
+    if (validaInput('frmRegistro')){
+        lblErrorRegistro.innerText = "Debes llenar todos los datos requeridos";
+    }else{
         usuariosActivos.push( new Usuario(txtNombre, txtApellido, txtEmail, txtUser, txtPassword));
         alert(`Hola ${txtNombre}, te registraste exitosamente porfavor inicia sesion`);
         registroModal.hide();
         limpiaDatos();
     }
 }
-function limpiaDatos () {
-    var elements = document.querySelectorAll('.form-control');
-    for (input of elements){
-        input.value="";
-    }
-    lblErrorIniciaSesion.innerText= "";
-    lblErrorRegistro.innerText="";
-}
-
 //-----------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------
 usuariosActivos.push(new Usuario ('humberto','sanchez','humberto@gmail.com', 'beto','humberto123'));
@@ -138,3 +143,49 @@ btnCerrarSesion.addEventListener('click',(e) => {
 });
 btnRegistrateModal.addEventListener('click',creaNuevoUsuario);
 btnCancelaRegistroModal.addEventListener('click', limpiaDatos);
+
+var eth = {"market_id":"ETH-PEN","last_price":["6500.09","PEN"],"min_ask":["6606.99","PEN"],"max_bid":["6533.01","PEN"]};
+var btc = {"market_id":"BTC-PEN","last_price":["110273.9","PEN"],"min_ask":["111481.1","PEN"],"max_bid":["110289.51","PEN"]};
+var ltc = {"market_id":"LTC-PEN","last_price":["230.0","PEN"],"min_ask":["230.99","PEN"],"max_bid":["225.01","PEN"]};
+
+localStorage.setItem(eth.market_id,JSON.stringify(eth));
+localStorage.setItem(btc.market_id,JSON.stringify(btc));
+localStorage.setItem(ltc.market_id,JSON.stringify(ltc));
+
+let frmComprar = document.getElementById('frmComprar');
+let rdoButtons = frmComprar.querySelectorAll("input[name='cripto']");
+var lblComprar = document.getElementById('lblComprar');
+var txtCantCompra = document.getElementById('txtCantCompra');
+var txtCantCompraPen = document.getElementById('txtCantCompraPen');
+var btnComprar = document.getElementById('btnComprar');
+function findSelected () {
+    let selected = frmComprar.querySelector("input[name='cripto']:checked").value;
+    lblComprar.innerText = `Escribe la cantidad de ${selected} que quieres comprar:`
+    txtCantCompra.setAttribute('placeholder', selected);
+    return selected;
+}
+rdoButtons.forEach(rdoButton=>{
+    rdoButton.addEventListener('change',findSelected);
+})
+findSelected();
+function calcularCompra(){
+    var recuperado;
+    var find = findSelected();
+    switch(find){
+        case 'BTC':
+            recuperado = JSON.parse(localStorage.getItem('BTC-PEN'));
+            txtCantCompraPen.value = txtCantCompra.value * recuperado.min_ask[0];
+            break;
+        case 'ETH':
+            recuperado = JSON.parse(localStorage.getItem('ETH-PEN'));
+            txtCantCompraPen.value = txtCantCompra.value * recuperado.min_ask[0];
+            break;
+        case 'LTC':
+            recuperado = JSON.parse(localStorage.getItem('LTC-PEN'));
+            txtCantCompraPen.value = txtCantCompra.value * recuperado.min_ask[0];
+            break;
+        default:
+            break;
+    } 
+}
+btnComprar.addEventListener('click', calcularCompra);
