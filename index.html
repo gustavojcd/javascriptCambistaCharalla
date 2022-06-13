@@ -17,31 +17,29 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Quienes Somos</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Tipo de Cambio</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Ayuda</a>
-                  </li>
-                </ul>
-                <form class="d-flex">
-                    <div><label id="lblBienvenida" class="me-2 d-none" for="">Bienvenido</label></div>
-                    <div class="dropdown me-5">
-                        <button id="btnUser" class="btn btn-secondary d-none" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                          <li><a class="dropdown-item">Mi Perfil</a></li>
-                          <li><a class="dropdown-item">Historial</a></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li><a id="btnCerrarSesion" class="dropdown-item" href="#">Salir</a></li>
-                        </ul>
-                    </div>
-                    <button id="btnIniciaSesion" type="button" class="btn btn-secondary me-4" data-bs-toggle="modal" data-bs-target="#iniciaSesionModal">Iniciar Sesion</button>
-                    <button id="btnRegistrate" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#registroModal">Registrate</button>
-                </form>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Quienes Somos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Tipo de Cambio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Ayuda</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <div><label id="lblBienvenida" class="me-2 d-none" for="">Bienvenido</label></div>
+                        <div class="dropdown me-5">
+                            <button id="btnUser" class="btn btn-secondary d-none" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a id="billetera" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#billeteraModal">Billetera</a></li>
+                                <li><a id="btnCerrarSesion" class="dropdown-item" href="#">Salir</a></li>
+                            </ul>
+                        </div>
+                        <button id="btnIniciaSesion" type="button" class="btn btn-secondary me-4" data-bs-toggle="modal" data-bs-target="#iniciaSesionModal">Iniciar Sesion</button>
+                        <button id="btnRegistrate" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#registroModal">Registrate</button>
+                    </form>
                 </div>
             </div>
         </nav>
@@ -113,6 +111,42 @@
         
         
         </div>
+        <div class="modal fade" id="billeteraModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Billetera</h5>
+                    </div>
+                    <div class="modal-body">
+                        <form id="frmBilletera" class="frmModal" action="">
+                            <div class="mb-3">
+                                <label for="txtPen" class="form-label">PEN:</label>
+                                <input type="number" class="form-control" id="txtPen" placeholder="0.00">
+                            </div>
+                            <div class="mb-3">
+                                <label for="txtBtc" class="form-label">BTC:</label>
+                                <input type="number" class="form-control" id="txtBtc" placeholder="0.00">
+                            </div>
+                            <div class="mb-3">
+                                <label for="txtLtc" class="form-label">LTC:</label>
+                                <input type="number" class="form-control" id="txtLtc" placeholder="0.00">
+                            </div>
+                            <div class="mb-3">
+                                <label for="txtEth" class="form-label">ETH:</label>
+                                <input type="number" class="form-control" id="txtEth" placeholder="0.00">
+                            </div>
+                        </form>
+                    </div>
+                    <div><label id="lblErrorRegistro" class="ms-3" for=""></label></div>
+                    <div class="modal-footer">
+                        <button id="btnCancelaRegistroModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button id="btnRegistrateModal" type="button" class="btn btn-primary">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        
+        
+        </div>
         <div id="viewBienvenida" class="">
             <div class="container-fluid d-md-inline-flex justify-content-md-around align-items-md-center mt-5 mb-5">
                 <div class="mb-5 ms-5 me-5">
@@ -129,59 +163,71 @@
         <div id="viewCambio" class="d-none">
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Comprar</button>
-                    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Vender</button>
+                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-comprar" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Comprar</button>
+                    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-vender" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Vender</button>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-                    <div id="billetera" class="container w-25 border p-4 mt-5 mb-5">
-                        <form id="frmComprar">
-                            <div class="d-flex justify-content-around">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="cripto" value="BTC" checked>BTC
+                <div class="tab-pane fade show active " id="nav-comprar" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                    <div id="calcularCompra" class="container p-5 mt-5 mb-5">
+                        <form id="frmCalcularCompra" class="d-flex flex-column flex-lg-row justify-content-around">
+                            <div>
+                                <label for="">Escoge alguna criptomoneda que quieras Comprar:</label><br>
+                                <div class="d-flex justify-content-around mt-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="cripto" value="BTC" checked>BTC
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="cripto" value="ETH">ETH
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="cripto" value="LTC">LTC
+                                    </div>
+                                </div><br>
+                                <label class="form-label" for="" id="lblComprar"></label>
+                                <input id="txtCantCompra" class="form-control" type="number" placeholder="0.00"><br>
+                                <div><label class="form-label" for="" id="lblPrecioCompra"></label></div>
+                                <input id="txtCantCompraPen" class="form-control" type="number" placeholder="0.00"><br>
+                                <div class="d-flex">
+                                    <button id="btnCalcularCompra" type="button" class="form-control">CALCULAR</button>
+                                    <button id="btnComprar" type="button" class="form-control" disabled>COMPRAR</button>
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="cripto" value="ETH">ETH
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="cripto" value="LTC">LTC
-                                </div>
-                            </div><br>
-                            <label class="form-label" for="" id="lblComprar">Escribe la cantidad de BTC que quieres comprar:</label>
-                            <input id="txtCantCompra" class="form-control" type="number" placeholder="BTC"><br>
-                            <div><label class="form-label" for="">Tipo de cambio:</label></div>
-                            <input id="txtCantCompraPen" class="form-control" type="number" placeholder="PEN"><br>
-                            <button id="btnComprar" type="button" class="form-control">COMPRAR</button>
+                            </div>
                         </form>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-                    <div id="billetera" class="container w-25 border p-4 mt-5 mb-5">
-                        <form action="" id="frmVender" class="">
-                            <div class="d-flex justify-content-around">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="cripto" value="vendeBTC" checked>BTC
+                <div class="tab-pane fade" id="nav-vender" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+                    <div id="calcularVenta" class="container p-5 mt-5 mb-5">
+                        <form id="frmCalcularVenta" class="d-flex flex-column flex-lg-row justify-content-around">
+                            <div>
+                                <label for="">Escoge alguna criptomoneda que quieras Vender:</label><br>
+                                <div class="d-flex justify-content-around mt-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="cripto" value="BTC" checked>BTC
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="cripto" value="ETH">ETH
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="cripto" value="LTC">LTC
+                                    </div>
+                                </div><br>
+                                <div><label class="form-label" for="" id="lblVender"></label></div>
+                                <input id="txtCantVender" class="form-control" type="text" placeholder="0.00"><br>
+                                <div><label class="form-label" for="" id="lblPrecioVenta"></label></div>
+                                <input id="txtCantVenderPen" class="form-control" type="text" placeholder="0.00"><br>
+                                <div class="d-flex">
+                                    <button id="btnCalcularVenta" type="button" class="form-control">CALCULAR</button>
+                                    <button id="btnVender" type="button" class="form-control" disabled>VENDER</button>
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="cripto" value="vendeETH">ETH
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="cripto" value="vendeLTC">LTC
-                                </div>
-                            </div><br>
-                            <div><label class="form-label" for="" id="lblVender">Escribe la cantidad de BTC que quieres vender:</label></div>
-                            <input class="form-control" type="text" placeholder="BTC"><br>
-                            <div><label class="form-label" for="">Tipo de cambio:</label></div>
-                            <input class="form-control" type="text" placeholder="Default input"><br>
-                            <button type="button" class="form-control">VENDER</button>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-    <footer id="footer">
+    <!-- <footer id="footer">
         <div class="container">
           <div class="row py-4">
             <div class="col d-flex justify-content-center align-items-center">
@@ -190,8 +236,9 @@
               <a href="https://instagram.com" target="_blank"><i class="fa-brands fa-instagram fa-2xl"></i></a></div>
           </div>
         </div>
-    </footer>
+    </footer> -->
     <script src="https://kit.fontawesome.com/e5de3b0df7.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
