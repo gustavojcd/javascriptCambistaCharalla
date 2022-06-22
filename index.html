@@ -25,7 +25,7 @@
                             <a class="nav-link" href="#">Tipo de Cambio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Ayuda</a>
+                            <a class="nav-link" id="ayuda">Ayuda</a>
                         </li>
                     </ul>
                     <form class="d-flex">
@@ -117,30 +117,29 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Billetera</h5>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body text-center">
                         <form id="frmBilletera" class="frmModal" action="">
                             <div class="mb-3">
                                 <label for="txtPen" class="form-label">PEN:</label>
-                                <input type="number" class="form-control" id="txtPen" placeholder="0.00">
+                                <input type="number" class="" id="txtPen" placeholder="0.00" disabled>
                             </div>
                             <div class="mb-3">
                                 <label for="txtBtc" class="form-label">BTC:</label>
-                                <input type="number" class="form-control" id="txtBtc" placeholder="0.00">
+                                <input type="number" class="" id="txtBtc" placeholder="0.00" disabled>
                             </div>
                             <div class="mb-3">
                                 <label for="txtLtc" class="form-label">LTC:</label>
-                                <input type="number" class="form-control" id="txtLtc" placeholder="0.00">
+                                <input type="number" class="" id="txtLtc" placeholder="0.00" disabled>
                             </div>
                             <div class="mb-3">
                                 <label for="txtEth" class="form-label">ETH:</label>
-                                <input type="number" class="form-control" id="txtEth" placeholder="0.00">
+                                <input type="number" class="" id="txtEth" placeholder="0.00" disabled>
                             </div>
                         </form>
                     </div>
                     <div><label id="lblErrorRegistro" class="ms-3" for=""></label></div>
                     <div class="modal-footer">
-                        <button id="btnCancelaRegistroModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button id="btnRegistrateModal" type="button" class="btn btn-primary">Aceptar</button>
+                        <button id="btnCancelaRegistroModal" type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
                     </div>
                 </div>
             </div>
@@ -186,11 +185,10 @@
                                 </div><br>
                                 <label class="form-label" for="" id="lblComprar"></label>
                                 <input id="txtCantCompra" class="form-control" type="number" placeholder="0.00"><br>
-                                <div><label class="form-label" for="" id="lblPrecioCompra"></label></div>
-                                <input id="txtCantCompraPen" class="form-control" type="number" placeholder="0.00"><br>
-                                <div class="d-flex">
-                                    <button id="btnCalcularCompra" type="button" class="form-control">CALCULAR</button>
-                                    <button id="btnComprar" type="button" class="form-control" disabled>COMPRAR</button>
+                                <div><label class="form-label" for="" id="lblPrecioCompra"></label></div><br>
+                                <div class="text-center">
+                                    <button id="btnCalcularCompra" type="button" class="form-control">COMPRAR</button>
+
                                 </div>
                             </div>
                         </form>
@@ -213,12 +211,12 @@
                                     </div>
                                 </div><br>
                                 <div><label class="form-label" for="" id="lblVender"></label></div>
-                                <input id="txtCantVender" class="form-control" type="text" placeholder="0.00"><br>
-                                <div><label class="form-label" for="" id="lblPrecioVenta"></label></div>
-                                <input id="txtCantVenderPen" class="form-control" type="text" placeholder="0.00"><br>
-                                <div class="d-flex">
-                                    <button id="btnCalcularVenta" type="button" class="form-control">CALCULAR</button>
-                                    <button id="btnVender" type="button" class="form-control" disabled>VENDER</button>
+                                <input id="txtCantVender" class="form-control" type="number" placeholder="0.00"><br>
+                                <div><label class="form-label" for="" id="lblPrecioVenta"></label></div><br>
+                                <!-- <input id="txtCantVenderPen" class="form-control" type="text" placeholder="0.00"><br> -->
+                                <div class="text-center">
+                                    <button id="btnCalcularVenta" type="button" class="form-control">VENDER</button>
+                                   
                                 </div>
                             </div>
                         </form>

@@ -1,0 +1,24 @@
+[
+    {"market_id":"BTC-PEN",
+        "last_price":["71602.19","PEN"],
+        "min_ask":["73385.21","PEN"],
+        "max_bid":["71851.97","PEN"],
+        "volume":["3.6934372","BTC"],
+        "price_variation_24h":"-0.004",
+        "price_variation_7d":"-0.326"},
+    {"market_id":"LTC-PEN",
+        "last_price":["200.0","PEN"],
+        "min_ask":["205.0","PEN"],
+        "max_bid":["190.01","PEN"],
+        "volume":["62.67025272","LTC"],
+        "price_variation_24h":"0.19",
+        "price_variation_7d":"0.053"},
+    {"market_id":"ETH-PEN",
+        "last_price":["3843.0","PEN"],
+        "min_ask":["3957.5","PEN"],
+        "max_bid":["3908.16","PEN"],
+        "volume":["3.574583417","ETH"],
+        "price_variation_24h":"0.027",
+        "price_variation_7d":"-0.326"}
+]
+   
